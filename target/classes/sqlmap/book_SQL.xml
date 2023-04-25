@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book">
+<insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="book_id">  
+    <![CDATA[
+    insert into book
+    (title, category, country, genre, price) 
+    values
+    (#{title}, #{category},#{country},#{genre}, #{price})
+    ]]>
+</insert>
+<select id="select_detail" parameterType="hashMap" resultType="hashMap">
+    <![CDATA[
+        select
+        title,
+        category,
+        country,
+        genre,
+        price,
+ insert_date
+        from
+        book
+        where
+        book_id = #{bookId}   
+    ]]>
+</select>
+<update id="update" parameterType="hashMap">  
+<![CDATA[  
+update book set  
+title = #{title},  
+category = #{category},  
+country=#{country},
+genre=#{genre},
+price = #{price}  
+where  
+book_id = #{bookId}  
+]]>  
+</update>  
+<delete id="delete" parameterType="hashMap">  
+<![CDATA[  
+delete from book  
+where  
+book_id = #{bookId}  
+]]>  
+</delete>  
+<select id="select_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where 1 = 1  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))   
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_korea_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '대한민국'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))  
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc 
+Limit 5 
+</select>  
+<select id="select_japan_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '일본'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%')) 
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_usa_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '미국'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%')) 
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_korea_romance_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '대한민국' and genre='순정만화'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))   
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_korea_teenage_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '대한민국'  and genre='소년만화'
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))  
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_korea_adult_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '대한민국' and genre='성인만화'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))  
+</if> 
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>   
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_korea_plan_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '대한민국' and genre='기획도서'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))   
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_korea_magazine_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '대한민국' and genre='만화잡지'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))   
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_japan_romance_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '일본'  and genre='순정만화'
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))  
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_japan_teenage_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '일본' and genre='소년만화'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%')) 
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_japan_adult_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '일본' and genre='성인만화'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%'))   
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_japan_plan_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '일본' and genre='기획도서'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%')) 
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_usa_dc_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '미국' and genre='DC 코믹스마블'
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%')) 
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_usa_comics_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '미국' and genre='코믹스리터러리'
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%')) 
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+<select id="select_usa_graphic_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select  
+book_id,  
+title,  
+category,  
+country,
+genre,
+price,  
+insert_date  
+from  
+book  
+where country = '미국' and genre='그래픽노블'  
+]]>  
+
+<if test="keyword != null and keyword != ''">  
+and (title like CONCAT('%',#{keyword},'%')) 
+</if>  
+<if test="maximalprice != null and maximalprice >= 0">  
+and (#{maximalprice} >= price)  
+</if>  
+<if test="cate != null and cate >= ''">  
+and (category like CONCAT('%',#{cate},'%'))  
+</if>
+order by insert_date desc  
+Limit 5
+</select>  
+
+</mapper>
